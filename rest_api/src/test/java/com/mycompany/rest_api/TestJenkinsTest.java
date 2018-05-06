@@ -31,7 +31,7 @@ public class TestJenkinsTest {
     
     @Before
     public void setUp() {
-       fail();
+       //fail();
     }
     
     @After
