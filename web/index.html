@@ -9,109 +9,140 @@ and open the template in the editor.
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css"/>
         <link rel="stylesheet" href="assets/css/main.css" type="text/css">
         <link rel="stylesheet" href="assets/css/home.css" type="text/css">
+        <link href="assets/css/stylish-portfolio.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
 
-        <title>TODO supply a title</title>
+        <title>GoCommunity</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="background-color: #2b2b2b">
+    <body style="background-color: #e0e0e0">
+        <nav class="navbar navbar-default">
+            <ul class="nav navbar-left navbar-collapse">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="campaignCreation.html">Create campaign</a></li>
+                <li><a href="userProfile.html">Profile</a></li>
+            </ul>
 
+        </nav>
+
+
+
+        <!-- Header -->
+        <header class="masthead d-flex">
+
+            <div class="container text-center my-auto">
+                <h1 class="mb-1">GoCommunity</h1>
+                <h3 class="mb-5">
+                    <em>Social economy crowdfunding</em>
+                </h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group" id="adv-search">
+                                <input type="text" class="form-control" placeholder="Search for campaigns" />
+                                <a href="#" class="btn btn-launch">Search</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay"></div>
+        </header>
 
         <section class="content-section current-campaigns" style= "background-color: #2b2b2b">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4" style="margin-top: 10% ">
-                <img  src="assets/img/green-4-go-logo.png" class="profile-image img responsive" alt="John Doe">
-            </div>
-            <div style="margin-top: 40% " class="col-sm-4">
-            </div>
-            <div class="container">
-                <div class="row">
-                    <header class="section-header text-center col-md-8 col-md-offset-2">
-                        <h3 class="underline">Current Causes</h3>
-                        <p class="section-intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                    </header>
-                </div> <!-- end row -->
 
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="campaign-card">
-                            <img src="images/cause-img-1.jpg" alt="" class="img-responsive">
-                            <div class="campaign-info">
-                                <h5>Educate Orphans</h5>
-                                <div class="category">
-                                    <span>Education</span>
-                                </div> <!-- end category -->
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div> <!-- end campaign-info -->
+            <div class="row">
+                <header class="section-header text-center col-md-8 col-md-offset-2">
+                    <h3 class="underline" style="color: white">Current Causes</h3>
+                    <p class="section-intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                </header>
+            </div> <!-- end row -->
 
-                            <div class="campaign-status">
-                                <div class="progress-bar"><span style="width: 10%;background-color:#27ae60"></span></div>
-                                <p>$1,500.00 of $15,000.00 raised</p>
-                            </div> <!-- end campaign-status -->
+            <div class="row" style="margin: 10px">
+                <div class="col-md-4 col-sm-6">
+                    <div class="campaign-card">
+                        <div class="campaign-info">
+                            <h5>Educate Orphans</h5>
+                            <div class="category">
+                                <span>Flu Fundraiser</span>
+                            </div> <!-- end category -->
+                            <p>Help us raise money to fight the seasonal flu</p>
+                        </div> <!-- end campaign-info -->
 
-                            <div class="card-footer">
-                                <a href="#" class="link-left">Donate Now</a>
-                                <a href="#" class="link-right">Read More</a>
-                            </div> <!-- end card-footer -->
+                        <div class="campaign-status">
+                            <div class="progress-bar"><span style="width: 10%;background-color:#27ae60"></span></div>
+                            <p>$1,500.00 of $15,000.00 raised</p>
+                        </div> <!-- end campaign-status -->
 
-                            <div class="clearfix"></div>
-                        </div> <!-- end campaign-card -->
-                    </div>
+                        <div class="card-footer">
+                            <a href="fundRaiserPage.html" class="link-left">Donate Now</a>
+                            <a href="#" class="link-right">Read More</a>
+                        </div> <!-- end card-footer -->
 
-                    <div class="col-md-4 col-sm-6">
-                        <div class="campaign-card">
-                            <img src="images/cause-img-2.jpg" alt="" class="img-responsive">
-                            <div class="campaign-info">
-                                <h5>Feed Poor Kids</h5>
-                                <div class="category">
-                                    <span>Food</span>
-                                </div> <!-- end category -->
-                                <p>Consectetur adipisicing elit, sed do lorem ipsum dolor sit amet, eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div> <!-- end campaign-info -->
+                        <div class="clearfix"></div>
+                    </div> <!-- end campaign-card -->
+                </div>
 
-                            <div class="campaign-status">
-                                <div class="progress-bar"><span style="width: 70%;background-color:#27ae60"></span></div>
-                                <p>$10,500.00 of $15,000.00 raised</p>
-                            </div> <!-- end campaign-status -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="campaign-card">
+                        <img src="images/cause-img-2.jpg" alt="" class="img-responsive">
+                        <div class="campaign-info">
+                            <h5>Feed Poor Kids</h5>
+                            <div class="category">
+                                <span>Food</span>
+                            </div> <!-- end category -->
+                            <p>Consectetur adipisicing elit, sed do lorem ipsum dolor sit amet, eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div> <!-- end campaign-info -->
 
-                            <div class="card-footer">
-                                <a href="#" class="link-left">Donate Now</a>
-                                <a href="#" class="link-right">Read More</a>
-                            </div> <!-- end card-footer -->
+                        <div class="campaign-status">
+                            <div class="progress-bar"><span style="width: 70%;background-color:#27ae60"></span></div>
+                            <p>$10,500.00 of $15,000.00 raised</p>
+                        </div> <!-- end campaign-status -->
 
-                            <div class="clearfix"></div>
-                        </div> <!-- end campaign-card -->
-                    </div>
+                        <div class="card-footer">
+                            <a href="#" class="link-left">Donate Now</a>
+                            <a href="#" class="link-right">Read More</a>
+                        </div> <!-- end card-footer -->
 
-                    <div class="col-md-4 col-sm-6">
-                        <div class="campaign-card">
-                            <img src="images/cause-img-3.jpg" alt="" class="img-responsive">
-                            <div class="campaign-info">
-                                <h5>Water For Slum Kids</h5>
-                                <div class="category">
-                                    <span>Water</span>
-                                </div> <!-- end category -->
-                                <p>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt consectetur adipisicing elit,  ut labore et dolore magna aliqua.</p>
-                            </div> <!-- end campaign-info -->
+                        <div class="clearfix"></div>
+                    </div> <!-- end campaign-card -->
+                </div>
 
-                            <div class="campaign-status">
-                                <div class="progress-bar"><span style="width: 25%;background-color:#27ae60"></span></div>
-                                <p>$3750.00 of $15,000.00 raised</p>
-                            </div> <!-- end campaign-status -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="campaign-card">
+                        <img src="images/cause-img-3.jpg" alt="" class="img-responsive">
+                        <div class="campaign-info">
+                            <h5>Water For Slum Kids</h5>
+                            <div class="category">
+                                <span>Water</span>
+                            </div> <!-- end category -->
+                            <p>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt consectetur adipisicing elit,  ut labore et dolore magna aliqua.</p>
+                        </div> <!-- end campaign-info -->
 
-                            <div class="card-footer">
-                                <a href="#" class="link-left">Donate Now</a>
-                                <a href="#" class="link-right">Read More</a>
-                            </div> <!-- end card-footer -->
+                        <div class="campaign-status">
+                            <div class="progress-bar"><span style="width: 25%;background-color:#27ae60"></span></div>
+                            <p>$3750.00 of $15,000.00 raised</p>
+                        </div> <!-- end campaign-status -->
 
-                            <div class="clearfix"></div>
-                        </div> <!-- end campaign-card -->
-                    </div>
+                        <div class="card-footer">
+                            <a href="#" class="link-left">Donate Now</a>
+                            <a href="#" class="link-right">Read More</a>
+                        </div> <!-- end card-footer -->
 
-                </div> <!-- end row -->
-            </div> <!-- end container -->
+                        <div class="clearfix"></div>
+                    </div> <!-- end campaign-card -->
+                </div>
+
+            </div> <!-- end row -->
         </section>
     </body>
 </html>
