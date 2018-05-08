@@ -13,22 +13,22 @@ import java.util.*;
  * @author root
  */
 public class Example {
-    /*
+        /*
     public static void main(String[] args){
         String example="ONE";
         // Get the EntityManager by creating an EntityManagerFactory via the persistence-unit name we provided.
         
         EntityManager entityManager = Persistence.createEntityManagerFactory("PERSISTENCE_UNIT_NAME").createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction(); // Not useful here, but useful to see
-        List<ExampleEntity> list  = null;
+        List<Utilizador> list  = null;
         try {
         transaction.begin();
         // Add an entity
-        ExampleEntity entity = new ExampleEntity();
-        entity.setTalky(example);
+        Utilizador entity = new Utilizador();
+        entity.setName("ola");
         entityManager.persist(entity);
         // List entities, via the named query we defined in mapping.xml
-        TypedQuery<ExampleEntity> nq = entityManager.createNamedQuery("list", ExampleEntity.class);
+        TypedQuery<Utilizador> nq = entityManager.createNamedQuery("list", Utilizador.class);
         list = nq.getResultList();
         // Commit the transaction
         transaction.commit();

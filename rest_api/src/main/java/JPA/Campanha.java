@@ -15,52 +15,68 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author root
  */
 @Entity
-@Table (name="CAMPANHA")
+@Table(name = "CAMPANHA")
+@XmlRootElement
 public class Campanha implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(name = "TITLE")
     private String title;
 
     @Column(name = "DESCRIPTION")
     private String description;
-    
+
     @Column(name = "GOAL")
     private double goal;
-    
+
     @Column(name = "CURRENT")
     private double current;
-    
+
     @OneToMany(
-        mappedBy = "campanha",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
+            mappedBy = "campanha",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private List<Donation> donations = new ArrayList<>();
-    
+
+    @ManyToOne
+    private Utilizador user;
+
+    public Utilizador getUser() {
+        return user;
+    }
+
+    public void setUser(Utilizador user) {
+        this.user = user;
+    }
+
     public Campanha() {
     }
 
-    
-    public Campanha(String title, String description, double goal){
-        this.title=title;
-        this.description=description;
-        this.goal=goal;
-        this.current=0;
-        
+    public Campanha(String title, String description, double goal, Utilizador user) {
+        this.title = title;
+        this.description = description;
+        this.goal = goal;
+        this.current = 0;
+        this.user = user;
+
     }
+
     public Long getId() {
         return id;
     }
@@ -101,6 +117,7 @@ public class Campanha implements Serializable {
         this.current = current;
     }
 
+    @XmlTransient
     public List<Donation> getDonations() {
         return donations;
     }
@@ -108,10 +125,11 @@ public class Campanha implements Serializable {
     public void setDonations(List<Donation> donations) {
         this.donations = donations;
     }
-    
-    public void addDonation(Donation donation){
+
+    public void addDonation(Donation donation) {
         donations.add(donation);
     }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -142,6 +160,4 @@ public class Campanha implements Serializable {
         return "Campanha{" + "id=" + id + ", title=" + title + ", description=" + description + ", goal=" + goal + ", current=" + current + '}';
     }
 
-
-    
 }
