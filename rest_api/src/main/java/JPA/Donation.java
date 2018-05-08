@@ -20,6 +20,7 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -27,6 +28,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table (name="DONATION")
+@XmlRootElement
 public class Donation implements Serializable {
 
     private static final long serialVersionUID = 1L;
