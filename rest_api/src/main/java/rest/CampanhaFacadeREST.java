@@ -32,7 +32,6 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 @Path("campaign")
 public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
-
     Utilizador u = new Utilizador("Artue", 0, "artue@ua.pt", "password");
     Campanha c = new Campanha("Doações para o Canil", "Sample description", 10, u);
     Campanha c1 = new Campanha("Angariação de fundos para festa", "Sample description", 1000, u);
