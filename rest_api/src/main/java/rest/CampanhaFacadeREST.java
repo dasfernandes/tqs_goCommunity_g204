@@ -7,10 +7,12 @@ package rest;
 
 import JPA.Campanha;
 import JPA.Utilizador;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -70,8 +72,15 @@ public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Campanha> findAll() {
-        TypedQuery<Campanha> query = em.createNamedQuery("list", Campanha.class);
-        return query.getResultList();
+        Utilizador u = new Utilizador("Artue", 0, "artue@ua.pt", "password");
+        Campanha c = new Campanha("Doações para o Canil", "Sample description", 10, u);
+        Campanha c1 = new Campanha("Angariação de fundos para festa", "Sample description", 1000, u);
+        List<Campanha> l = new ArrayList<>();
+        l.add(c);
+        l.add(c1);
+        return l;
+        //TypedQuery query = em.createQuery("SELECT p FROM Campanha p", Campanha.class);
+        //return query.getResultList();
     }
 
     @GET
