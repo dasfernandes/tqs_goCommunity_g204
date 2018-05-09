@@ -7,10 +7,12 @@ package rest;
 
 import JPA.Campanha;
 import JPA.Utilizador;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -31,11 +33,18 @@ import javax.ws.rs.core.MediaType;
 @Path("campaign")
 public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
 
+    Utilizador u = new Utilizador("Artue", 0, "artue@ua.pt", "password");
+    Campanha c = new Campanha("Doações para o Canil", "Sample description", 10, u);
+    Campanha c1 = new Campanha("Angariação de fundos para festa", "Sample description", 1000, u);
+    List<Campanha> l = new ArrayList<>();
+
     @PersistenceContext(unitName = "PERSISTENCE_UNIT_NAME")
     private EntityManager em;
 
     public CampanhaFacadeREST() {
         super(Campanha.class);
+        l.add (c);
+        l.add (c1);
     }
 
     @POST
@@ -43,7 +52,7 @@ public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
     public void create(@FormParam("user_id") Integer id, @FormParam("title") String title, @FormParam("description") String description, @FormParam("goal") Double goal) {
         Utilizador u = em.find(Utilizador.class, id);
         Campanha c = new Campanha(title, description, goal, u);
-        em.persist(title);        
+        em.persist(title);
     }
 
     @PUT
@@ -63,15 +72,17 @@ public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Campanha find(@PathParam("id") Long id) {
-        return super.find(id);
+        return l.get(id.intValue());
+        //return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Campanha> findAll() {
-        TypedQuery<Campanha> query = em.createNamedQuery("list", Campanha.class);
-        return query.getResultList();
+        return l;
+        //TypedQuery query = em.createQuery("SELECT p FROM Campanha p", Campanha.class);
+        //return query.getResultList();
     }
 
     @GET
@@ -92,5 +103,5 @@ public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
