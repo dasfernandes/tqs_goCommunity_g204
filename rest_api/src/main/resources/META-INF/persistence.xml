@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-  <persistence-unit name="PERSISTENCE_UNIT_NAME" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+  <persistence-unit name="PERSISTENCE_UNIT_NAME" transaction-type="JTA">
+    <jta-data-source>java:/PostgresDS</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/tqs_db"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="tqs"/>
-      <property name="javax.persistence.jdbc.password" value="tqs123"/>
       <property name="eclipselink.logging.level" value="ALL"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
     </properties>

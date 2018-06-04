@@ -13,40 +13,19 @@ import java.util.*;
  * @author root
  */
 public class Example {
-        /*
+        
     public static void main(String[] args){
         String example="ONE";
         // Get the EntityManager by creating an EntityManagerFactory via the persistence-unit name we provided.
         
-        EntityManager entityManager = Persistence.createEntityManagerFactory("PERSISTENCE_UNIT_NAME").createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction(); // Not useful here, but useful to see
-        List<Utilizador> list  = null;
-        try {
-        transaction.begin();
-        // Add an entity
-        Utilizador entity = new Utilizador();
-        entity.setName("ola");
-        entityManager.persist(entity);
-        // List entities, via the named query we defined in mapping.xml
-        TypedQuery<Utilizador> nq = entityManager.createNamedQuery("list", Utilizador.class);
-        list = nq.getResultList();
-        // Commit the transaction
-        transaction.commit();
-        } catch (Exception e) {
-        transaction.rollback();
-        throw e; // Ergo showing a 500 error. You may want to throw an exception that is not detailing stuff about your JPA connection
-        } finally {
-        entityManager.clear(); // Clears all the entities from the EntityManager
-        entityManager.close();
-        }
         
         EntityManager em = Persistence.createEntityManagerFactory("PERSISTENCE_UNIT_NAME").createEntityManager();
-        
+        /*
         em.getTransaction().begin();
         for (int i = 0; i < 100; i++) {
-            Campanha p = new Campanha(i+"", i+"", i);
             
             Utilizador u= new Utilizador(i+"", i, i+"",i+"");
+            Campanha p = new Campanha(i+"", i+"", i,u);
             
             Donation d1= new Donation(u,p,i,new Date());
             Donation d2= new Donation(u,p,i*2,new Date());
@@ -56,9 +35,10 @@ public class Example {
             em.persist(d1);
             em.persist(d2);
         }
-        
-        em.getTransaction().commit();
-        
+        em.getTransaction().commit();*/
+        long id=1;
+        System.out.println(em.find(Campanha.class, id));
+        System.out.println(12313214);
         // Find the number of Campanha objects in the database:
         Query q1 = em.createQuery("SELECT COUNT(p) FROM Campanha p");
         System.out.println("Total Campanhas: " + q1.getSingleResult());
@@ -67,7 +47,7 @@ public class Example {
         q1 = em.createQuery("SELECT COUNT(p) FROM Utilizador p");
         System.out.println("Total Utilizadores: " + q1.getSingleResult());
         
-        
+        /*
         TypedQuery<Utilizador> query =
                 em.createQuery("SELECT p FROM Utilizador p", Utilizador.class);
         List<Utilizador> results = query.getResultList();
@@ -90,9 +70,9 @@ public class Example {
         for (Donation p : results3) {
             System.out.println(p);
         }
-        
+        */
         // Close the database connection:
         em.close();
         
-    }*/
+    }
 }
