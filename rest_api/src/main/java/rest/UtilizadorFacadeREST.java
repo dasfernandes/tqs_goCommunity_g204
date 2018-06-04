@@ -5,7 +5,9 @@
  */
 package rest;
 
+import JPA.Campanha;
 import JPA.Utilizador;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,11 +31,18 @@ import javax.ws.rs.core.MediaType;
 @Path("user")
 public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
 
+    Utilizador u = new Utilizador("Artue", 0, "artue@ua.pt", "password");
+    Utilizador u1 = new Utilizador("Manel", 0.01, "manel@ua.pt", "password");
+    List<Utilizador> l = new ArrayList<>();
+
     @PersistenceContext(unitName = "PERSISTENCE_UNIT_NAME")
     private EntityManager em;
 
     public UtilizadorFacadeREST() {
         super(Utilizador.class);
+
+        l.add(u);
+        l.add(u1);
     }
 
     @POST
@@ -60,15 +69,18 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Utilizador find(@PathParam("id") Long id) {
-        return super.find(id);
+        return l.get(id.intValue());
+        //return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Utilizador> findAll() {
-        TypedQuery<Utilizador> query = em.createQuery("SELECT p.id, p.name, p.email, p.sumdonated FROM Utilizador p", Utilizador.class);
-        return query.getResultList();
+        return l;
+
+        //TypedQuery<Utilizador> query = em.createQuery("SELECT p.id, p.name, p.email, p.sumdonated FROM Utilizador p", Utilizador.class);
+        //return query.getResultList();
     }
 
     @GET
@@ -92,5 +104,5 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
