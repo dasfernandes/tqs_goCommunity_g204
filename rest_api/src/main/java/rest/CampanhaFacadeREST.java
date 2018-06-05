@@ -95,7 +95,6 @@ public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
-        System.out.println(123);
         return String.valueOf(super.count());
     }
 
