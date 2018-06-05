@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author root
  */
+@XmlRootElement
 @Entity
 @Table (name="DONATION")
-@XmlRootElement
 public class Donation implements Serializable {
 
     private static final long serialVersionUID = 1L;

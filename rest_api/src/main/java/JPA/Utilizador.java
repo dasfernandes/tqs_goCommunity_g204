@@ -24,9 +24,9 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author root
  */
+@XmlRootElement
 @Entity
 @Table (name="UTILIZADOR")
-@XmlRootElement
 public class Utilizador implements Serializable {
 
     private static final long serialVersionUID = 1L;
