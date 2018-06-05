@@ -70,8 +70,6 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
     public Utilizador find(@PathParam("id") Long id) {
         //return l.get(id.intValue());
         System.out.println(123);
-        super.create(u1);
-        super.create(u);
         return super.find(id);
     }
 
