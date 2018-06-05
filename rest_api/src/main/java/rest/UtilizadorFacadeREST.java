@@ -75,12 +75,12 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON})
     public List<Utilizador> findAll() {
         
         //return l;
         System.out.println(3231312);
-        TypedQuery<Utilizador> query = em.createQuery("SELECT p.id, p.name, p.email, p.sumdonated FROM Utilizador p", Utilizador.class);
+        TypedQuery<Utilizador> query = em.createQuery("SELECT p FROM Utilizador p", Utilizador.class);
         return query.getResultList();
     }
 

@@ -6,6 +6,7 @@
 package rest;
 
 import JPA.Campanha;
+import JPA.CampanhaCreate;
 import JPA.Utilizador;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +48,11 @@ public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
     }
 
     @POST
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-    public void create(@FormParam("user_id") Integer id, @FormParam("title") String title, @FormParam("description") String description, @FormParam("goal") Double goal) {
-        Utilizador u = em.find(Utilizador.class, id);
-        Campanha c = new Campanha(title, description, goal, u);
-        em.persist(title);
+    @Consumes({ MediaType.APPLICATION_JSON})
+    public void create(CampanhaCreate campanha) {
+        Utilizador u = em.find(Utilizador.class, campanha.user_id);
+        Campanha c = new Campanha(campanha.title, campanha.description, campanha.goal, u);
+        super.create(c);
     }
 
     @PUT
@@ -76,7 +77,7 @@ public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON})
     public List<Campanha> findAll() {
         //return l;
         TypedQuery query = em.createQuery("SELECT p FROM Campanha p", Campanha.class);
