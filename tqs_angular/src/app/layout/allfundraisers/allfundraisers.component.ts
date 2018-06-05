@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AllService} from './allfundraisers-service';
+import {Fundraiser} from './fundraiser';
 
 @Component({
   selector: 'app-allfundraisers',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllfundraisersComponent implements OnInit {
 
-  constructor() { }
+    allFunds: Fundraiser[];
+
+  constructor(private allService: AllService) {
+      this.allService.getAll().subscribe( json => this.addList(json));
+  }
 
   ngOnInit() {
   }
+  addList(json: any) {
+      this.allFunds = json;
+      console.log(this.allFunds);
+  }
+
+  setStore(fund: Fundraiser){
+      localStorage.setItem('currentFund', fund.id + '');
+  }
+
 
 }
