@@ -6,8 +6,6 @@
     <properties>
       <property name="eclipselink.logging.level" value="ALL"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
-      <property name="javax.persistence.jtaDataSource" value="java:/PostgresDS"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
     </properties>
   </persistence-unit>
 </persistence>

@@ -9,9 +9,15 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
+    isLoggedin : boolean;
 
     constructor(private translate: TranslateService, public router: Router) {
-
+        console.log(localStorage.getItem('login'));
+        if(localStorage.getItem('login') == 'true') {
+            this.isLoggedin = true;
+        } else {
+            this.isLoggedin = false;
+        }
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
@@ -46,7 +52,8 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        localStorage.removeItem('login');
+        this.isLoggedin= false;
     }
 
     changeLang(language: string) {

@@ -20,7 +20,6 @@ const routes: Routes = [
             { path: 'createcampaign', loadChildren: './createcampaign/createcampaign.module#CreatecampaignModule'},
             { path: 'allfundraisers', loadChildren: './allfundraisers/allfundraisers.module#AllfundraisersModule'},
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
-
         ]
     }
 ];
