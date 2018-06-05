@@ -115,6 +115,7 @@ public class Utilizador implements Serializable {
     
     public void addDonation(Donation donation){
         donations.add(donation);
+        sumdonated+=donation.getAmmount();
     }
 
     @Override

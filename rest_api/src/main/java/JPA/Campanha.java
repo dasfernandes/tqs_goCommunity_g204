@@ -128,6 +128,7 @@ public class Campanha implements Serializable {
 
     public void addDonation(Donation donation) {
         donations.add(donation);
+        current+=donation.getAmmount();
     }
 
     @Override
