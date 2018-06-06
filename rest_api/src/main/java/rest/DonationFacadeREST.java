@@ -36,10 +36,10 @@ public class DonationFacadeREST extends AbstractFacade<Donation> {
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Donation entity) {
+    public Long create2(Donation entity) {
         super.create(entity);
+        return entity.getId();
     }
 
     @PUT

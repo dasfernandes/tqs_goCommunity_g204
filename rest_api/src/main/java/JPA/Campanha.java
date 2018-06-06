@@ -45,6 +45,9 @@ public class Campanha implements Serializable {
     @Column(name = "GOAL")
     private double goal;
 
+    @Column(name = "IMAGE")
+    private String image;
+
     @Column(name = "CURRENT")
     private double current;
 
@@ -70,15 +73,24 @@ public class Campanha implements Serializable {
     public Campanha() {
     }
 
-    public Campanha(String title, String description, double goal, Utilizador user) {
+    public Campanha(String title, String description, double goal, Utilizador user, String image) {
         this.title = title;
         this.description = description;
         this.goal = goal;
         this.current = 0;
         this.user = user;
+        this.image=image;
 
     }
+    
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -160,7 +172,7 @@ public class Campanha implements Serializable {
 
     @Override
     public String toString() {
-        return "Campanha{" + "id=" + id + ", title=" + title + ", description=" + description + ", goal=" + goal + ", current=" + current + '}';
+        return "Campanha{" + "id=" + id + ", title=" + title + ", description=" + description + ", goal=" + goal + ", current=" + current + ", image="+image+ '}';
     }
 
 }

@@ -33,26 +33,21 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 @Path("campaign")
 public class CampanhaFacadeREST extends AbstractFacade<Campanha> {
-    Utilizador u = new Utilizador("Artue", 0, "artue@ua.pt", "password");
-    Campanha c = new Campanha("Doações para o Canil", "Sample description", 10, u);
-    Campanha c1 = new Campanha("Angariação de fundos para festa", "Sample description", 1000, u);
-    List<Campanha> l = new ArrayList<>();
 
     @PersistenceContext(unitName = "PERSISTENCE_UNIT_NAME")
     private EntityManager em;
 
     public CampanhaFacadeREST() {
         super(Campanha.class);
-        l.add (c);
-        l.add (c1);
     }
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON})
-    public void create(CampanhaCreate campanha) {
+    public Long create2(CampanhaCreate campanha) {
         Utilizador u = em.find(Utilizador.class, campanha.user_id);
-        Campanha c = new Campanha(campanha.title, campanha.description, campanha.goal, u);
+        Campanha c = new Campanha(campanha.title, campanha.description, campanha.goal, u,campanha.image);
         super.create(c);
+        return c.getId();
     }
 
     @PUT
