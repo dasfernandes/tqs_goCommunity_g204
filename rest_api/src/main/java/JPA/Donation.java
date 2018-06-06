@@ -37,11 +37,11 @@ public class Donation implements Serializable {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "utilizador_id")
+    @JoinColumn(name = "utilizador_id", referencedColumnName="id")
     private Utilizador utilizador;
  
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "campanha_id")
+    @JoinColumn(name = "campanha_id", referencedColumnName="id")
     private Campanha campanha;
     
     @Column(name = "AMMOUNT")
