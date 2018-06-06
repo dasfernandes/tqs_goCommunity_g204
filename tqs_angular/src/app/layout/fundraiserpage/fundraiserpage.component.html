@@ -4,12 +4,12 @@
     <div class="container">
         <div class="row">
                 <div class="col-4">
-                    <h3>5234</h3>
+                    <h3>1</h3>
                     <span>backers</span>
                 </div>
                 <div class="col-4">
-                    <h3>$10,350</h3>
-                    <span>raised out of $23,000</span>
+                    <h3>{{fundRaiser.current}}</h3>
+                    <span>raised out of {{fundRaiser.goal}}</span>
                 </div>
                 <div class="col-4t">
                     <h3>27</h3>
@@ -24,13 +24,13 @@
             <div class="content col-md-8 col-sm-12 col-xs-12">
                 <div class="section-block">
                     <div class="funding-meta">
-                        <h1>Flu fundraiser</h1>
+                        <h1>{{fundRaiser.title}}</h1>
                         <div class="video-frame">
                             <img style="height: 300px; width: 700p" src="http://home.bt.com/images/aussie-flu-136424074707202601-180104121014.jpg">
                         </div>
-                        <span class="type-meta"><i class="fa fa-user"></i> Jonathan Doe</span>
+                        <span class="type-meta"><i class="fa fa-user"></i> {{fundRaiser.user.name}}</span>
 
-                        <p>Help the ppl survive the flu pls halp</p>
+
                         <h2>$10,350</h2>
                         <span class="contribution">raised by <strong>5,234</strong> ready to launch</span>
                         <div class="progress">
@@ -68,8 +68,7 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="about">
                             <div class="about-information">
-                                <h1 class="section-title">About flu</h1>
-                                <h1>This is a problem because</h1>
+                                <h1 class="section-title">{{ fundRaiser.description }}</h1>
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="updates">
@@ -109,29 +108,11 @@
                         <h3>$10</h3>
                         <h2>Early Bird</h2>
                         <p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-                        <span><i class="fa fa-users"></i> 180 backers</span>
-                        <a href="" class="btn btn-reward">GET THIS REWARD</a>
                     </div>
                     <div class="reward-block popular">
                         <h3>$20</h3>
                         <h2>Value Bird</h2>
                         <p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-                        <span><i class="fa fa-users"></i> 320 backers</span>
-                        <a href="" class="btn btn-reward">GET THIS REWARD</a>
-                    </div>
-                    <div class="reward-block">
-                        <h3>$30</h3>
-                        <h2>Super Bird</h2>
-                        <p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-                        <span><i class="fa fa-users"></i> 105 backers</span>
-                        <a href="" class="btn btn-reward">GET THIS REWARD</a>
-                    </div>
-                    <div class="reward-block last">
-                        <h3>$50</h3>
-                        <h2>Premium Bird</h2>
-                        <p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-                        <span><i class="fa fa-users"></i> 64 backers</span>
-                        <a href="" class="btn btn-reward">GET THIS REWARD</a>
                     </div>
                     <!--/reward blocks-->
                 </div>
@@ -139,31 +120,4 @@
             </div>
         </div>
     </div>
-</div><nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login</a></li>
-                <li><a href="campaignCreation.html">Create campaign</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
-</nav>
-
+</div>
