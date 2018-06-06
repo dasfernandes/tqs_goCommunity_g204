@@ -22,6 +22,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -50,6 +52,23 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
     public void create(Utilizador entity) {
         super.create(entity);
     }
+    
+    @POST
+    @Path("login")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public String login(LoginXml login) {
+        System.out.println(login.email);
+        System.out.println(login.pwhash);
+        TypedQuery<Utilizador> query = em.createQuery("SELECT u FROM Utilizador u where email=\'"+login.email+"\'", Utilizador.class);
+        List<Utilizador> lista=query.getResultList();
+        if (lista.size()>0 ){
+            if (lista.get(0).getPwhash().equals(login.pwhash)){
+                System.out.println(123);
+                return lista.get(0).toString();
+            }
+        }
+        return "Email ou palavra passe errados "+login.email+" - "+login.pwhash;
+    }
 
     @PUT
     @Path("{id}")
@@ -68,30 +87,21 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Utilizador find(@PathParam("id") Long id) {
-        //return l.get(id.intValue());
-        System.out.println(123);
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({ MediaType.APPLICATION_JSON})
-    public List<Utilizador> findAll() {
-        
-        //return l;
-        System.out.println(3231312);
-        TypedQuery<Utilizador> query = em.createQuery("SELECT p FROM Utilizador p", Utilizador.class);
-        return query.getResultList();
+    public List<Utilizador> findAll() { 
+        return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Utilizador> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        TypedQuery<Utilizador> query = em.createQuery("SELECT p.id, p.name, p.email, p.sumdonated FROM Utilizador p", Utilizador.class);
-        query.setMaxResults(to - from + 1);
-        query.setFirstResult(from);
-        return query.getResultList();
+        return super.findRange(new int[]{from, to});
     }
 
     @GET
@@ -105,5 +115,20 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+    @XmlRootElement
+    private static class LoginXml {
+        @XmlElement public String email;
+        @XmlElement public String pwhash;
+    }
+
+}
+
+@XmlRootElement
+class LoginXMl {
+    @XmlElement public String title;
+    @XmlElement public String description;
+    @XmlElement public double goal;
+    @XmlElement public Long user_id;
 
 }
