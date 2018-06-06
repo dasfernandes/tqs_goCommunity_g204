@@ -18,5 +18,6 @@ public class CampanhaCreate {
     @XmlElement public String description;
     @XmlElement public double goal;
     @XmlElement public Long user_id;
+    @XmlElement public String image;
 
 }

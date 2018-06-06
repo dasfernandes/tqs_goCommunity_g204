@@ -27,8 +27,8 @@ public class UtilizadorTest {
     
     @Before
     public void setUp() {
-        user = new Utilizador("testName", 0, "testEmail", "testPw");
-        campanha = new Campanha("testTitle", "testDescription", 0, user);
+        user = new Utilizador("testName", "testEmail", "testPw");
+        campanha = new Campanha("testTitle", "testDescription", 0, user,"");
         donation = new Donation(user, campanha, 0, new Date());
     }
     
@@ -150,7 +150,7 @@ public class UtilizadorTest {
      */
     @Test
     public void testHashCode() {
-        Utilizador copy = new Utilizador("testName2", 0, "testEmail2", "testPw2");
+        Utilizador copy = new Utilizador("testName2", "testEmail2", "testPw2");
         copy.setId(4L);
         assertNotEquals(user.hashCode(), copy.hashCode());
         assertEquals(user.hashCode(), user.hashCode());
@@ -161,7 +161,7 @@ public class UtilizadorTest {
      */
     @Test
     public void testEquals() {
-        Utilizador copy = new Utilizador("testName2", 0, "testEmail2", "testPw2");
+        Utilizador copy = new Utilizador("testName2", "testEmail2", "testPw2");
         copy.setId(4L);
         assertFalse(user.equals(copy));
         assertTrue(user.equals(user));
@@ -172,7 +172,7 @@ public class UtilizadorTest {
      */
     @Test
     public void testToString() {
-        Utilizador copy = new Utilizador("testName2", 0, "testEmail2", "testPw2");
+        Utilizador copy = new Utilizador("testName2", "testEmail2", "testPw2");
         assertNotEquals(copy.toString(), user.toString());
     }
 

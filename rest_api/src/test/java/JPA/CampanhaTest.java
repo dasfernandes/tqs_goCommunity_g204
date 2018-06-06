@@ -26,8 +26,8 @@ public class CampanhaTest {
     
     @Before
     public void setUp() {
-        user = new Utilizador("testName", 0, "testEmail", "testPw");
-        campanha = new Campanha("testTitle", "testDescription", 0, user);
+        user = new Utilizador("testName", "testEmail", "testPw");
+        campanha = new Campanha("testTitle", "testDescription", 0, user,"");
     }
 
     @After
@@ -160,7 +160,7 @@ public class CampanhaTest {
      */
     @Test
     public void testHashCode() {
-        Campanha copy = new Campanha("testTitle", "testDescription", 0, user);
+        Campanha copy = new Campanha("testTitle", "testDescription", 0, user,"");
         assertEquals(copy.hashCode(), copy.hashCode());
     }
 
@@ -169,7 +169,7 @@ public class CampanhaTest {
      */
     @Test
     public void testEquals() {
-        Campanha copy = new Campanha("testTitle3", "testDescription", 0, user);
+        Campanha copy = new Campanha("testTitle3", "testDescription", 0, user,"");
         copy.setId(4L);
         assertFalse(campanha.equals(copy));
         assertTrue(campanha.equals(campanha));
@@ -180,7 +180,7 @@ public class CampanhaTest {
      */
     @Test
     public void testToString() {
-        Campanha copy = new Campanha("testTitle", "testDescription", 0, user);
+        Campanha copy = new Campanha("testTitle", "testDescription", 0, user,"");
         assertEquals(copy.toString(), campanha.toString());
     }
 

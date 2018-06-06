@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Path("user")
 public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
 
-    Utilizador u = new Utilizador("Artue2", 1, "artue@ua.pt", "password");
-    Utilizador u1 = new Utilizador("Manel2", 2, "manel@ua.pt", "password");
+    Utilizador u = new Utilizador("Artue2", "artue@ua.pt", "password");
+    Utilizador u1 = new Utilizador("Manel2", "manel@ua.pt", "password");
     List<Utilizador> l = new ArrayList<>();
 
     @PersistenceContext(unitName = "PERSISTENCE_UNIT_NAME")
@@ -47,27 +47,27 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Utilizador entity) {
+    public Long createUser(Utilizador entity) {
         super.create(entity);
+        return entity.getId();
     }
     
     @POST
     @Path("login")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public String login(LoginXml login) {
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Utilizador login(LoginXml login) {
         System.out.println(login.email);
         System.out.println(login.pwhash);
         TypedQuery<Utilizador> query = em.createQuery("SELECT u FROM Utilizador u where email=\'"+login.email+"\'", Utilizador.class);
         List<Utilizador> lista=query.getResultList();
         if (lista.size()>0 ){
             if (lista.get(0).getPwhash().equals(login.pwhash)){
-                System.out.println(123);
-                return lista.get(0).toString();
+                return lista.get(0);
             }
         }
-        return "Email ou palavra passe errados "+login.email+" - "+login.pwhash;
+        return null;
     }
 
     @PUT

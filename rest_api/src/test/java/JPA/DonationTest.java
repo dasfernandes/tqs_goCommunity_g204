@@ -25,8 +25,8 @@ public class DonationTest {
     
     @Before
     public void setUp() {
-        user = new Utilizador("testName", 0, "testEmail", "testPw");
-        campanha = new Campanha("testTitle", "testDescription", 0, user);
+        user = new Utilizador("testName", "testEmail", "testPw");
+        campanha = new Campanha("testTitle", "testDescription", 0, user,"");
         donation = new Donation(user, campanha, 0, new Date());
     }
     
@@ -48,7 +48,7 @@ public class DonationTest {
      */
     @Test
     public void testSetUser() {
-        Utilizador u = new Utilizador("testName1", 1, "testEmail1", "testPw1");
+        Utilizador u = new Utilizador("testName1", "testEmail1", "testPw1");
         assertEquals(u, donation.getUtilizador());
     }
 

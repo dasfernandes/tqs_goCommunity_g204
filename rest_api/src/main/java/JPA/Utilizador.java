@@ -38,7 +38,7 @@ public class Utilizador implements Serializable {
     private String name;
 
     @Column(name = "SUMDONATED")
-    private Double sumdonated;
+    private Double sumdonated=0.0;
     
     @Column(name = "EMAIL")
     private String email;
@@ -57,9 +57,8 @@ public class Utilizador implements Serializable {
     }
 
     
-    public Utilizador(String name, double sumdonated, String email, String pwhash){
+    public Utilizador(String name, String email, String pwhash){
         this.name=name;
-        this.sumdonated=sumdonated;
         this.email=email;
         this.pwhash=pwhash;
         
