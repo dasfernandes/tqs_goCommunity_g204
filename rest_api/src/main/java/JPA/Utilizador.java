@@ -24,9 +24,9 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author root
  */
-@XmlRootElement
 @Entity
 @Table (name="UTILIZADOR")
+@XmlRootElement
 public class Utilizador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +52,13 @@ public class Utilizador implements Serializable {
         orphanRemoval = true    
     )
     private List<Donation> donations = new ArrayList<>();
+    
+    @OneToMany(
+        mappedBy = "utilizador",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true    
+    )
+    private List<Campanha> campaigns = new ArrayList<>();
     
     public Utilizador() {
     }
@@ -115,6 +122,20 @@ public class Utilizador implements Serializable {
     
     public void addDonation(Donation donation){
         donations.add(donation);
+        sumdonated+=donation.getAmmount();
+    }
+    
+    @XmlTransient
+    public List<Campanha> getCampaigns() {
+        return campaigns;
+    }
+
+    public void setCampanhas(List<Campanha> campaigns) {
+        this.campaigns = campaigns;
+    }
+    
+    public void addCampanha(Campanha campanha){
+        campaigns.add(campanha);
     }
 
     @Override

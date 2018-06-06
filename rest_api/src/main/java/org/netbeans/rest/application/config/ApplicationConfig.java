@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(rest.CampanhaFacadeREST.class);
+        resources.add(rest.DonationFacadeREST.class);
         resources.add(rest.UtilizadorFacadeREST.class);
     }
     

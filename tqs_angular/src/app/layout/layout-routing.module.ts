@@ -18,7 +18,8 @@ const routes: Routes = [
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'fundraiserpage', loadChildren: './fundraiserpage/fundraiserpage.module#FundraiserpageModule'},
             { path: 'createcampaign', loadChildren: './createcampaign/createcampaign.module#CreatecampaignModule'},
-            { path: 'allfundraisers', loadChildren: './allfundraisers/allfundraisers.module#AllfundraisersModule'}
+            { path: 'allfundraisers', loadChildren: './allfundraisers/allfundraisers.module#AllfundraisersModule'},
+            { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
         ]
     }
 ];

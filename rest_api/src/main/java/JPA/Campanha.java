@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -78,7 +78,7 @@ public class Campanha implements Serializable {
         this.user = user;
 
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -130,6 +130,7 @@ public class Campanha implements Serializable {
 
     public void addDonation(Donation donation) {
         donations.add(donation);
+        current+=donation.getAmmount();
     }
 
     @Override

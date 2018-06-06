@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author root
  */
-@XmlRootElement
 @Entity
 @Table (name="DONATION")
+@XmlRootElement
 public class Donation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,11 +37,11 @@ public class Donation implements Serializable {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "utilizador_id")
+    @JoinColumn(name = "utilizador_id", referencedColumnName="id")
     private Utilizador utilizador;
  
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "campanha_id")
+    @JoinColumn(name = "campanha_id", referencedColumnName="id")
     private Campanha campanha;
     
     @Column(name = "AMMOUNT")
