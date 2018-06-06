@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package rest;
 
+
+package rest;
+/*
 import JPA.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -38,11 +35,12 @@ import rest.CampanhaFacadeREST;
 import rest.CampanhaFacadeREST;
 import rest.UtilizadorFacadeREST;
 import rest.UtilizadorFacadeREST;
-
+*/
 /**
  *
  * @author Artur
  */
+/*
 @RunWith(Arquillian.class)
 public class CampanhaFacadeRESTTest {
 
@@ -105,7 +103,7 @@ public class CampanhaFacadeRESTTest {
         assertEquals("Cancer funssssdraiser", c.getTitle());
         assertEquals(3.0, c.getGoal(), 0.01);
     }
-
+*/
 //    @Test
 //    @InSequence(3)
 //    public void testPut() {
@@ -123,4 +121,4 @@ public class CampanhaFacadeRESTTest {
 //        assertEquals("Howard", list[3].getName());
 //        assertEquals(4, list[3].getAge());
 //    }
-}
+//}
