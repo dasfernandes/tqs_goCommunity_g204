@@ -6,9 +6,11 @@
 package rest;
 
 import JPA.Campanha;
+import JPA.LoginXml;
 import JPA.Utilizador;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,26 +33,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Stateless
 @Path("user")
-public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
+public class UtilizadorFacadeREST {
 
-    Utilizador u = new Utilizador("Artue2", "artue@ua.pt", "password");
-    Utilizador u1 = new Utilizador("Manel2", "manel@ua.pt", "password");
-    List<Utilizador> l = new ArrayList<>();
 
-    @PersistenceContext(unitName = "PERSISTENCE_UNIT_NAME")
-    private EntityManager em;
+    @EJB
+    UtilizadorFacade utilizador;
 
     public UtilizadorFacadeREST() {
-        super(Utilizador.class);
-        l.add(u);
-        l.add(u1);
     }
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Long createUser(Utilizador entity) {
-        super.create(entity);
-        return entity.getId();
+        return utilizador.createUser(entity);
     }
     
     @POST
@@ -58,77 +53,47 @@ public class UtilizadorFacadeREST extends AbstractFacade<Utilizador> {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Utilizador login(LoginXml login) {
-        System.out.println(login.email);
-        System.out.println(login.pwhash);
-        TypedQuery<Utilizador> query = em.createQuery("SELECT u FROM Utilizador u where email=\'"+login.email+"\'", Utilizador.class);
-        List<Utilizador> lista=query.getResultList();
-        if (lista.size()>0 ){
-            if (lista.get(0).getPwhash().equals(login.pwhash)){
-                return lista.get(0);
-            }
-        }
-        return null;
+        return utilizador.login(login);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Long id, Utilizador entity) {
-        super.edit(entity);
+        utilizador.edit(id,entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+        utilizador.remove(id);
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Utilizador find(@PathParam("id") Long id) {
-        return super.find(id);
+        return utilizador.find(id);
     }
 
     @GET
-    @Override
     @Produces({ MediaType.APPLICATION_JSON})
     public List<Utilizador> findAll() { 
-        return super.findAll();
+        return utilizador.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Utilizador> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+        return utilizador.findRange(from,to);
     }
 
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
-        return String.valueOf(super.count());
+        return utilizador.countREST();
     }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    
-    @XmlRootElement
-    private static class LoginXml {
-        @XmlElement public String email;
-        @XmlElement public String pwhash;
-    }
-
-}
-
-@XmlRootElement
-class LoginXMl {
-    @XmlElement public String title;
-    @XmlElement public String description;
-    @XmlElement public double goal;
-    @XmlElement public Long user_id;
 
 }
