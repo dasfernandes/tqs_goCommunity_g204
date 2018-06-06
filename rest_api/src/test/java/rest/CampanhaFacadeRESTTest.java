@@ -31,6 +31,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.netbeans.rest.application.config.ApplicationConfig;
 import rest.AbstractFacade;
 import rest.AbstractFacade;
 import rest.CampanhaFacadeREST;
@@ -51,7 +52,7 @@ public class CampanhaFacadeRESTTest {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
                 .addClasses(
-                        AbstractFacade.class, CampanhaFacadeREST.class, UtilizadorFacadeREST.class, Campanha.class, Donation.class, Utilizador.class);
+                        AbstractFacade.class, CampanhaFacadeREST.class, UtilizadorFacadeREST.class, Campanha.class, Donation.class, Utilizador.class, ApplicationConfig.class);
     }
 
     @ArquillianResource
@@ -60,7 +61,7 @@ public class CampanhaFacadeRESTTest {
     @Before
     public void setUp() throws MalformedURLException {
         Client client = ClientBuilder.newClient();
-        target = client.target(URI.create(new URL(base, "registry/campaign").toExternalForm()));
+        target = client.target(URI.create(new URL(base, "rest_api/rest/campaign/").toExternalForm()));
         target.register(Campanha.class);
     }
 
@@ -98,12 +99,11 @@ public class CampanhaFacadeRESTTest {
     @InSequence(2)
     public void testGetSingle() {
         Campanha c = target
-                .path("{id}")
-                .resolveTemplate("user", "Dimitri nas Silvas")
-                .request(MediaType.APPLICATION_XML)
+                .path("0")
+                .request(MediaType.APPLICATION_JSON)
                 .get(Campanha.class);
         assertEquals("Cancer funssssdraiser", c.getTitle());
-        assertEquals(30000, c.getGoal());
+        assertEquals(3.0, c.getGoal(), 0.01);
     }
 
 //    @Test
