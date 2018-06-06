@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.rest_api;
+package rest;
 
 import JPA.*;
 import static org.junit.Assert.assertEquals;
@@ -32,7 +32,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import rest.AbstractFacade;
+import rest.AbstractFacade;
 import rest.CampanhaFacadeREST;
+import rest.CampanhaFacadeREST;
+import rest.UtilizadorFacadeREST;
 import rest.UtilizadorFacadeREST;
 
 /**
@@ -40,7 +43,7 @@ import rest.UtilizadorFacadeREST;
  * @author Artur
  */
 @RunWith(Arquillian.class)
-public class CampanhaFacadeRESTIT {
+public class CampanhaFacadeRESTTest {
 
     private WebTarget target;
 
@@ -99,7 +102,7 @@ public class CampanhaFacadeRESTIT {
                 .resolveTemplate("user", "Dimitri nas Silvas")
                 .request(MediaType.APPLICATION_XML)
                 .get(Campanha.class);
-        assertEquals("Cancer fundraiser", c.getTitle());
+        assertEquals("Cancer funssssdraiser", c.getTitle());
         assertEquals(30000, c.getGoal());
     }
 
@@ -120,5 +123,4 @@ public class CampanhaFacadeRESTIT {
 //        assertEquals("Howard", list[3].getName());
 //        assertEquals(4, list[3].getAge());
 //    }
-//}
 }
