@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CampaignService} from './fundraiser-service';
 
 @Component({
   selector: 'app-createcampaign',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatecampaignComponent implements OnInit {
 
-  constructor() { }
+  constructor(private campaignService: CampaignService) { }
 
+  public title: string;
+  public description: string;
+  public image: string;
+  public goal: number;
   ngOnInit() {
+  }
+
+  click(title: string, description: string, image: string, goal: number) {
+      this.campaignService.createCampaign(title, description, image, goal).subscribe( json => alert('Success'));
   }
 
 }

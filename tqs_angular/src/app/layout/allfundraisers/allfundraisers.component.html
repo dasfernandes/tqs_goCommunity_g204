@@ -7,6 +7,8 @@
             <div class="card-body">
                 <h4 class="card-title">{{ fund.title }}</h4>
                 <p class="card-text">{{fund.description}}</p>
+                <img style="height: 200px; width: 500px" src="{{fund.image}}">
+
             </div>
             <button type="button" class="btn btn-lg btn-default" (click)="setStore(fund)" [routerLink]="['/fundraiserpage']" [routerLinkActive]="['router-link-active']" >See details</button>
         </div>

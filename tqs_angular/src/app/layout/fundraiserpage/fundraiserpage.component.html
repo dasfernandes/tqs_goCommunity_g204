@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
                 <div class="col-4">
-                    <h3>1</h3>
+                    <h3>0</h3>
                     <span>backers</span>
                 </div>
                 <div class="col-4">
@@ -26,22 +26,18 @@
                     <div class="funding-meta">
                         <h1>{{fundRaiser.title}}</h1>
                         <div class="video-frame">
-                            <img style="height: 300px; width: 700p" src="http://home.bt.com/images/aussie-flu-136424074707202601-180104121014.jpg">
+                            <img style="height: 300px; width: 700px" src="{{fundRaiser.image}}">
                         </div>
                         <span class="type-meta"><i class="fa fa-user"></i> {{fundRaiser.user.name}}</span>
 
 
-                        <h2>$10,350</h2>
-                        <span class="contribution">raised by <strong>5,234</strong> ready to launch</span>
+                        <br>
+                        <br>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                                <span class="sr-only">45% Complete</span>
+                            <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="fundRaiser.current" aria-valuemin="0" [attr.aria-valuemax]="fundRaiser.goal" style="width: {{fundRaiser.current}}%;">
                             </div>
                         </div>
-                        <span class="goal-progress"><strong>45%</strong> of $23,000 raised</span>
                     </div>
-                    <span class="count-down"><strong>27</strong>Days to go.</span>
-                    <a href="#" class="btn btn-launch">Donate</a>
                 </div>
                 <!--signup
                 <div class="section-block signup">
@@ -54,46 +50,26 @@
                 </div>
                 <!--/signup-->
                 <!--tabs-->
-                <div class="section-block">
-                    <div class="section-tabs">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a></li>
-                            <li role="presentation"><a href="#updates" aria-controls="updates" role="tab" data-toggle="tab">Updates</a></li>
-                        </ul>
-                    </div>
-                </div>
+
                 <!--/tabs-->
                 <!--tab panes-->
                 <div class="section-block">
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="about">
                             <div class="about-information">
-                                <h1 class="section-title">{{ fundRaiser.description }}</h1>
+                                <h3 class="section-title">{{ fundRaiser.description }}</h3>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="updates">
-                            <div class="update-information">
-                                <h1 class="section-title">Updates</h1>
-                                <!--update items-->
-                                <div class="update-post">
-                                    <h4 class="update-title">We've started shipping!</h4>
-                                    <span class="update-date">Posted 2 days ago</span>
-                                    <p>Suspendisse luctus at massa sit amet bibendum. Cras commodo congue urna, vel dictum velit bibendum eget. Vestibulum quis risus euismod, facilisis lorem nec, dapibus leo. Quisque sodales eget dolor iaculis dapibus. Vivamus sit amet lacus ipsum. Nullam varius lobortis neque, et efficitur lacus. Quisque dictum tellus nec mi luctus imperdiet. Morbi vel aliquet velit, accumsan dapibus urna. Cras ligula orci, suscipit id eros non, rhoncus efficitur nisi.</p>
-                                </div>
-                                <div class="update-post">
-                                    <h4 class="update-title">Launch begins manufacturing </h4>
-                                    <span class="update-date">Posted 9 days ago</span>
-                                    <p>Suspendisse luctus at massa sit amet bibendum. Cras commodo congue urna, vel dictum velit bibendum eget. Vestibulum quis risus euismod, facilisis lorem nec, dapibus leo. Quisque sodales eget dolor iaculis dapibus. Vivamus sit amet lacus ipsum. Nullam varius lobortis neque, et efficitur lacus. Quisque dictum tellus nec mi luctus imperdiet. Morbi vel aliquet velit, accumsan dapibus urna. Cras ligula orci, suscipit id eros non, rhoncus efficitur nisi.</p>
-                                </div>
-                                <div class="update-post">
-                                    <h4 class="update-title">Designs have now been finalized</h4>
-                                    <span class="update-date">Posted 17 days ago</span>
-                                    <p>Suspendisse luctus at massa sit amet bibendum. Cras commodo congue urna, vel dictum velit bibendum eget. Vestibulum quis risus euismod, facilisis lorem nec, dapibus leo. Quisque sodales eget dolor iaculis dapibus. Vivamus sit amet lacus ipsum. Nullam varius lobortis neque, et efficitur lacus. Quisque dictum tellus nec mi luctus imperdiet. Morbi vel aliquet velit, accumsan dapibus urna. Cras ligula orci, suscipit id eros non, rhoncus efficitur nisi.</p>
-                                </div>
-                                <!--/update items-->
-                            </div>
-                        </div>
+
                     </div>
+                </div>
+
+                <br>
+                <br>
+                <p> Gostaria de ajudar esta causa?</p>
+                <div class="form-group">
+                    <input type="password" class="form-control input-underline input-lg" id="" [(ngModel)]="value" [ngModelOptions]="{standalone: true}" placeholder="Valor a doar">
+                    <button type="button" class="btn btn-lg btn-default" (click)="donate1(value)"   >Donate</button>
                 </div>
             </div>
             <!--/tabs-->
@@ -105,14 +81,14 @@
                     <h1 class="section-title">REWARDS</h1>
                     <!--reward blocks-->
                     <div class="reward-block">
-                        <h3>$10</h3>
+                        <h3>10% of the goal</h3>
                         <h2>Early Bird</h2>
-                        <p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
+                        <p>This reward is not currently set on the platform</p>
                     </div>
                     <div class="reward-block popular">
-                        <h3>$20</h3>
+                        <h3>20% of the goal</h3>
                         <h2>Value Bird</h2>
-                        <p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
+                        <p>This reward is not currently set on the platform</p>
                     </div>
                     <!--/reward blocks-->
                 </div>

@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
     constructor() {
-        localStorage.setItem('url','http://192.168.1.71:8080/rest_api-1.0-SNAPSHOT/rest/' );
-        localStorage.setItem('currentFund', 4 + '');
+        localStorage.setItem('url','http://192.168.160.230:8080/rest_api-1.0-SNAPSHOT/rest/' );
+        localStorage.setItem('currentFund', 3 + '');
     }
 
     ngOnInit() {

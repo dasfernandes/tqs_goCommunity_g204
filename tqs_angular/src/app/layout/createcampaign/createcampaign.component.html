@@ -9,20 +9,26 @@
                         <form>
                             <div class="form-group">
                                 <label for="campaignName">Campaign name</label>
-                                <input class="form-control" id="campaignName">
+                                <input class="form-control" id="campaignName" [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
                             </div>
 
                             <div class="form-group">
                                 <label for="goal">Monetary goal</label>
-                                <input class="form-control" id="goal">
+                                <input class="form-control" id="goal" [(ngModel)]="goal" [ngModelOptions]="{standalone: true}">
                             </div>
 
                             <div class="form-group">
                                 <label for="description">Campaign description</label>
-                                <textarea class="form-control" id="description" rows="3"></textarea>
+                                <textarea class="form-control" id="description" rows="3" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
                             </div>
+
+                            <div class="form-group">
+                                <label for="goal">Image url</label>
+                                <input class="form-control"  [(ngModel)]="image" [ngModelOptions]="{standalone: true}">
+                            </div>
+
                         </form>
-                        <button type="submit" class="btn btn-launch">Submit</button>
+                        <button type="submit" class="btn btn-launch" (click)="click(title, description, image, goal)">Submit</button>
 
                     </div>
 

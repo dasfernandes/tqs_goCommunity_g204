@@ -10,10 +10,12 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
     isLoggedin : boolean;
+    public name: string;
 
     constructor(private translate: TranslateService, public router: Router) {
         console.log(localStorage.getItem('login'));
-        if(localStorage.getItem('login') == 'true') {
+        this.name = localStorage.getItem('name');
+        if (localStorage.getItem('login') == 'true') {
             this.isLoggedin = true;
         } else {
             this.isLoggedin = false;

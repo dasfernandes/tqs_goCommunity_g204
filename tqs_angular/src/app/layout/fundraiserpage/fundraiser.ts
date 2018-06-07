@@ -7,4 +7,5 @@ export class Fundraiser{
     goal: number;
     current: number;
     user: User;
+    image: string;
 }

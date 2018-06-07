@@ -6,21 +6,21 @@
             <form role="form">
                 <div class="form-content">
                     <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" id="" placeholder="Full Name">
+                        <input type="text" class="form-control input-underline input-lg" id=""  [(ngModel)]="name" [ngModelOptions]="{standalone: true}" placeholder="Full Name">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" id="" placeholder="Email">
+                        <input type="text" class="form-control input-underline input-lg" id=""  [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="Email">
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Password">
+                        <input type="password" class="form-control input-underline input-lg"  [(ngModel)]="pass" [ngModelOptions]="{standalone: true}" id="" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control input-underline input-lg" id="" placeholder="Repeat Password">
                     </div>
                 </div>
-                <a class="btn rounded-btn" [routerLink]="['/dashboard']"> Register </a>&nbsp;
+                <a class="btn rounded-btn" (click)="click(name, pass, email)"> Register </a>&nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
             </form>
         </div>
