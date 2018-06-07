@@ -20,7 +20,9 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,10 +38,12 @@ public class Donation implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @XmlTransient
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utilizador_id", referencedColumnName="id")
     private Utilizador utilizador;
  
+    @XmlTransient
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campanha_id", referencedColumnName="id")
     private Campanha campanha;
@@ -133,5 +137,8 @@ public class Donation implements Serializable {
         return "Donation{" + "id=" + id + ", user=" + utilizador + ", campanha=" + campanha + ", ammount=" + ammount + ", date=" + date + '}';
     }
     
+    public String customSerialize() {
+        return "{\"utilizador\": " + utilizador.getId() + ", \"campanha\": " + campanha.getId() + ", \"id\": " + this.id + ",\"ammount\": " + this.ammount + ",\"date\": " + this.date + "}";
+    }
 }
 

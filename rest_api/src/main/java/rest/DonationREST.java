@@ -6,19 +6,16 @@
 package rest;
 
 import JPA.Campanha;
-import JPA.CampanhaCreate;
+import JPA.Donation;
 import JPA.Utilizador;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -26,33 +23,35 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Dimitri
+ * @author root
  */
 @Stateless
-@Path("campaign")
-public class CampanhaFacadeREST{
+@Path("donation")
+public class DonationREST {
 
     @EJB
-    CampanhaFacade facade;
-    
+    DonationFacade facade;
 
-    public CampanhaFacadeREST() {
+    public DonationREST() {
+        
     }
 
     @POST
-    @Consumes({ MediaType.APPLICATION_JSON})
-    public Long create2(CampanhaCreate campanha) {
-        return facade.create2(campanha);
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Long create(DonateXml entity) { 
+        return facade.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, Campanha entity) {
-        facade.edit(id, entity);
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void edit(@PathParam("id") Long id, Donation entity) {
+        facade.edit(entity);
     }
 
     @DELETE
@@ -63,29 +62,36 @@ public class CampanhaFacadeREST{
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Campanha find(@PathParam("id") Long id) {
+    @Produces({MediaType.APPLICATION_JSON})
+    public Donation find(@PathParam("id") Long id) {
         return facade.find(id);
     }
 
     @GET
-    @Produces({ MediaType.APPLICATION_JSON})
-    public List<Campanha> findAll() {
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Donation> findAll() {
         return facade.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Campanha> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return facade.findRange(from, to);
+    public List<Donation> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+        return facade.findRange(new int[]{from, to});
     }
 
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
-        return facade.countREST();
+        return String.valueOf(facade.count());
+    }
+    
+    @XmlRootElement
+    public static class DonateXml {
+        @XmlElement public String ammount;
+        @XmlElement public Long user_id;
+        @XmlElement public Long campanha_id;
     }
 
 }

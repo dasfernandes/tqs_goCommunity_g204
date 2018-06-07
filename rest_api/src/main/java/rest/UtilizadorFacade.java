@@ -28,23 +28,32 @@ import javax.ws.rs.core.MediaType;
  * @author root
  */
 @Stateless
-public class CampanhaFacade extends AbstractFacade<Campanha> {
+public class UtilizadorFacade extends AbstractFacade<Utilizador> {
 
     @PersistenceContext(unitName = "PERSISTENCE_UNIT_NAME")
     private EntityManager em;
 
-    public CampanhaFacade() {
-        super(Campanha.class);
+    public UtilizadorFacade() {
+        super(Utilizador.class);
+    }
+    
+    public Long create2(Utilizador u) {
+        super.create(u);
+        return u.getId();
+    }
+    
+    public Utilizador login(UtilizadorREST.LoginXml login) {
+        TypedQuery<Utilizador> query = em.createQuery("SELECT u FROM Utilizador u where u.email=\'"+login.email+"\'", Utilizador.class);
+        List<Utilizador> lista=query.getResultList();
+        if (lista.size()>0 ){
+            if (lista.get(0).getPwhash().equals(login.pwhash)){
+                return lista.get(0);
+            }
+        }
+        return null;
     }
 
-    public Long create(CampanhaCreate campanha) {
-        Utilizador u = em.find(Utilizador.class, campanha.user_id);
-        Campanha c = new Campanha(campanha.title, campanha.description, campanha.goal, u,campanha.image);
-        super.create(c);
-        return c.getId();
-    }
-
-    public void edit(@PathParam("id") Long id, Campanha entity) {
+    public void edit(@PathParam("id") Long id, Utilizador entity) {
         super.edit(entity);
     }
 
@@ -52,16 +61,16 @@ public class CampanhaFacade extends AbstractFacade<Campanha> {
         super.remove(super.find(id));
     }
 
-    public Campanha find(@PathParam("id") Long id) {
+    public Utilizador find(@PathParam("id") Long id) {
         return super.find(id);
     }
 
     @Override
-    public List<Campanha> findAll() {
+    public List<Utilizador> findAll() {
         return super.findAll();
     }
 
-    public List<Campanha> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Utilizador> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
@@ -73,5 +82,4 @@ public class CampanhaFacade extends AbstractFacade<Campanha> {
     protected EntityManager getEntityManager() {
 return em;
     }
-    
 }
