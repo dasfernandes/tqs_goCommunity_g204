@@ -29,9 +29,9 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(rest.CampanhaFacadeREST.class);
-        resources.add(rest.DonationFacadeREST.class);
-        resources.add(rest.UtilizadorFacadeREST.class);
+        resources.add(rest.CampanhaREST.class);
+        resources.add(rest.DonationREST.class);
+        resources.add(rest.UtilizadorREST.class);
     }
     
 }
