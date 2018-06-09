@@ -9,6 +9,10 @@ import JPA.Campanha;
 import JPA.CampanhaCreate;
 import JPA.Donation;
 import JPA.Utilizador;
+import JPA.Utilizador.UtilizadorSerialized;
+import JPA.UtilizadorCreate;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -24,7 +28,6 @@ import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -43,7 +46,7 @@ public class UtilizadorRESTIT {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
                 .addClasses(
-                        AbstractFacade.class, UtilizadorREST.class, UtilizadorFacade.class, Campanha.class, Donation.class, Utilizador.class, ApplicationConfig.class, CampanhaCreate.class)
+                        AbstractFacade.class, UtilizadorREST.class, CampanhaFacade.class, CampanhaREST.class, UtilizadorFacade.class, Campanha.class, Donation.class, Utilizador.class, ApplicationConfig.class)
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml");
     }
 
@@ -75,7 +78,7 @@ public class UtilizadorRESTIT {
     @Test
     @InSequence(3)
     public void testCreate() throws Exception {
-        Utilizador user = new Utilizador("testName", "testEmail", "testPw");
+        UtilizadorCreate user = new UtilizadorCreate("testName", "testEmail", "testPw");
         Response response = target.request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
         assertEquals(200, response.getStatus());
         assertEquals(1L, (long)response.readEntity(Long.class));
@@ -83,20 +86,14 @@ public class UtilizadorRESTIT {
     
     @Test
     @InSequence(4)
-    public void getSingleCampanha() throws Exception {
+    public void getSingleUser() throws Exception {
         Response response = target.path("/1").request().get();
         assertEquals(200, response.getStatus());
         Utilizador u = response.readEntity(Utilizador.class);
         assertEquals("testName", u.getName());
     }
     
-    @Test
-    @InSequence(5)
-    public void getCampanhaFail() throws Exception {
-        Response response = target.path("/2").request().get();
-        assertEquals(204, response.getStatus());
-    }
-    
+
     @Test
     @InSequence(6)
     public void getCountNotEmpty() throws Exception {
@@ -105,26 +102,17 @@ public class UtilizadorRESTIT {
         assertEquals(response.readEntity(String.class), "1");
     }
     
+    
     @Test
     @InSequence(7)
-    public void editCampanha() throws Exception {
-        Response response = target.path("/1").request().get();
+    public void testGetAllNotEmpty() throws Exception {
+        Response response = target.request().get();
         assertEquals(200, response.getStatus());
-        Utilizador u = response.readEntity(Utilizador.class);
-        assertEquals("testName", u.getName());
-        u.setName("testName2");
-        target.path("/1").request().put(Entity.entity(u, MediaType.APPLICATION_JSON));
-        Response response2 = target.path("/1").request().get();
-        assertEquals(200, response2.getStatus());
-        Utilizador u2 = response2.readEntity(Utilizador.class);
-        assertEquals("testName2", u2.getName());
-        
-        
     }
     
     @Test
     @InSequence(8)
-    public void removeCampanha() throws Exception {
+    public void removeUser() throws Exception {
         Response response = target.path("/1").request().delete();
         assertEquals(204, response.getStatus());
         Response response2 = target.path("/count").request().get();

@@ -5,6 +5,7 @@
  */
 package JPA;
 
+import JPA.Donation.DonationSerial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,7 +56,8 @@ public class Campanha implements Serializable {
     @OneToMany(
             mappedBy = "campanha",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
     private List<Donation> donations = new ArrayList<>();
 
@@ -79,8 +82,7 @@ public class Campanha implements Serializable {
         this.goal = goal;
         this.current = 0;
         this.user = user;
-        this.image=image;
-
+        this.image = image;
     }
     
     public String getImage() {
@@ -169,10 +171,98 @@ public class Campanha implements Serializable {
         }
         return true;
     }
+    
+    public CampanhaSerial getSerialized() {
+        return new CampanhaSerial(this);
+    }
 
     @Override
     public String toString() {
         return "Campanha{" + "id=" + id + ", title=" + title + ", description=" + description + ", goal=" + goal + ", current=" + current + ", image="+image+ '}';
     }
+    
+    @XmlRootElement
+    public class CampanhaSerial {
 
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public double getGoal() {
+            return goal;
+        }
+
+        public void setGoal(double goal) {
+            this.goal = goal;
+        }
+
+        public double getCurrent() {
+            return current;
+        }
+
+        public void setCurrent(double current) {
+            this.current = current;
+        }
+
+        public Long getUserId() {
+            return userId;
+        }
+
+        public void setUserId(Long user) {
+            this.userId = user;
+        }
+        public Long id;
+        public String title, description, image;
+        public double goal, current;
+        public Long userId;
+        public List<DonationSerial> donations = new ArrayList<>();
+        
+        public CampanhaSerial(Campanha c) {
+            this.title = c.title;
+            this.description = c.description;
+            this.goal = c.goal;
+            this.current = c.current;
+            this.userId = c.user.getId();
+            this.image = c.image;
+            this.id = c.id;
+            for (Donation d: c.getDonations())
+                donations.add(d.getSerialized());
+        }
+        
+        public CampanhaSerial() {
+
+        }
+        @Override
+        public String toString() {
+            return "CampanhaSerial{" + "id=" + id + ", title=" + title + ", description=" + description + ", goal=" + goal + ", current=" + current + ", image="+image+ '}';
+        }
+    }
 }

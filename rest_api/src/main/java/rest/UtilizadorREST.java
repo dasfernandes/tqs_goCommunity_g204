@@ -7,6 +7,8 @@ package rest;
 
 import JPA.Campanha;
 import JPA.Utilizador;
+import JPA.Utilizador.UtilizadorSerialized;
+import JPA.UtilizadorCreate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -41,9 +43,14 @@ public class UtilizadorREST {
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Long createUser(Utilizador entity) {
-        facade.create2(entity);
-        return entity.getId();
+    public Long createUser(UtilizadorCreate entity) {       
+        return facade.create2(entity);
+    }
+    
+    @GET
+    @Path("/test")
+    public Long createUserTest() {       
+        return facade.create2(new UtilizadorCreate("nome", "pass", "crl"));
     }
     
     @POST
@@ -70,22 +77,23 @@ public class UtilizadorREST {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Utilizador find(@PathParam("id") Long id) {
-        return facade.find(id);
+    @Produces({MediaType.APPLICATION_JSON})
+    public UtilizadorSerialized find(@PathParam("id") Long id) {
+        return facade.find(id).getSerialized();
     }
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON})
-    public List<Utilizador> findAll() { 
-        return facade.findAll();
+    public List<UtilizadorSerialized> findAll() { 
+        System.out.println("oi");
+        return facade.findAllFiltered();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Utilizador> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return facade.findRange(new int[]{from, to});
+    public List<UtilizadorSerialized> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+        return facade.findRange(from, to);
     }
 
     @GET

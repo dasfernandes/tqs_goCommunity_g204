@@ -7,11 +7,13 @@ package JPA;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author root
  */
 @Entity
-@Table (name="UTILIZADOR")
+@Table(name = "UTILIZADOR")
 @XmlRootElement
 public class Utilizador implements Serializable {
 
@@ -33,36 +35,37 @@ public class Utilizador implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(name = "NAME")
     private String name;
 
     @Column(name = "SUMDONATED")
-    private Double sumdonated=0.0;
-    
+    private Double sumdonated = 0.0;
+
     @Column(name = "EMAIL")
     private String email;
-    
+
     @Column(name = "PWHASH")
     private String pwhash;
-    
+
     @OneToMany(
-        mappedBy = "utilizador",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true    
+            mappedBy = "utilizador",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
     private List<Donation> donations = new ArrayList<>();
-    
+
     public Utilizador() {
     }
 
-    
-    public Utilizador(String name, String email, String pwhash){
-        this.name=name;
-        this.email=email;
-        this.pwhash=pwhash;
-        
+    public Utilizador(String name, String email, String pwhash) {
+        this.name = name;
+        this.email = email;
+        this.pwhash = pwhash;
+        this.sumdonated = 0.0;
     }
+
     public Long getId() {
         return id;
     }
@@ -111,10 +114,10 @@ public class Utilizador implements Serializable {
     public void setDonations(List<Donation> donations) {
         this.donations = donations;
     }
-    
-    public void addDonation(Donation donation){
+
+    public void addDonation(Donation donation) {
         donations.add(donation);
-        sumdonated+=donation.getAmmount();
+        sumdonated += donation.getAmmount();
     }
 
     @Override
@@ -147,6 +150,30 @@ public class Utilizador implements Serializable {
         return "Utilizador{" + "id=" + id + ", name=" + name + ", sumdonated=" + sumdonated + ", email=" + email + ", pwhash=" + pwhash + '}';
     }
 
+    public UtilizadorSerialized getSerialized() {
+        return new UtilizadorSerialized(this);
+    }
 
-    
+    @XmlRootElement
+    public class UtilizadorSerialized {
+
+        public long id;
+        public String name, email, pwhash;
+        public double sumdonated;
+        public List<Donation.DonationSerial> donations = new ArrayList<>();
+
+        public UtilizadorSerialized() {
+        }
+
+        public UtilizadorSerialized(Utilizador u) {
+            this.name = u.name;
+            this.email = u.email;
+            this.pwhash = u.pwhash;
+            this.id = u.id;
+            this.sumdonated = u.sumdonated;
+            for (Donation d: u.getDonations())
+                donations.add(d.getSerialized());
+        }
+    }
+
 }

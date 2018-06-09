@@ -7,6 +7,7 @@ package rest;
 
 import JPA.Campanha;
 import JPA.Donation;
+import JPA.Donation.DonationSerial;
 import JPA.Utilizador;
 import java.util.Date;
 import java.util.List;
@@ -38,12 +39,12 @@ public class DonationREST {
     DonationFacade facade;
 
     public DonationREST() {
-        
+
     }
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
-    public Long create(DonateXml entity) { 
+    public Long create(DonateXml entity) {
         return facade.create(entity);
     }
 
@@ -63,21 +64,25 @@ public class DonationREST {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Donation find(@PathParam("id") Long id) {
-        return facade.find(id);
+    public DonationSerial find(@PathParam("id") Long id) {
+        try {
+            return facade.find(id);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Donation> findAll() {
-        return facade.findAll();
+    public List<DonationSerial> findAll() {
+        return facade.findAllFiltered();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Donation> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return facade.findRange(new int[]{from, to});
+    public List<DonationSerial> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+        return facade.findRangeFiltered(from, to);
     }
 
     @GET
@@ -86,12 +91,27 @@ public class DonationREST {
     public String countREST() {
         return String.valueOf(facade.count());
     }
-    
+
     @XmlRootElement
     public static class DonateXml {
-        @XmlElement public String ammount;
-        @XmlElement public Long user_id;
-        @XmlElement public Long campanha_id;
+
+        @XmlElement
+        public double ammount;
+        @XmlElement
+        public Long user_id;
+        @XmlElement
+        public Long campanha_id;
+
+        public DonateXml() {
+        }
+
+        ;
+        
+        public DonateXml(Long campanha_id, Long user_id, double amount) {
+            this.ammount = amount;
+            this.campanha_id = campanha_id;
+            this.user_id = user_id;
+        }
     }
 
 }
