@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="row">
+    <ion-row *ngFor="let f of fundraisers">
+      <ion-card>
+        <img src={{f.image}}/>
+        <ion-card-content>
+          <ion-card-title>
+            {{ f.title}}
+          </ion-card-title>
+          <p>
+            {{f.description}}
+          </p>
+
+          <button col-12 ion-button color="secondary" (click)="clicked(f.id)">Ajudar esta campanha</button>
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-row>
+
+  </div>
+
+</ion-content>
