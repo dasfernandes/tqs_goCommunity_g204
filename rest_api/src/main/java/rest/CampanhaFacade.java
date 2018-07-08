@@ -6,8 +6,10 @@
 package rest;
 
 import JPA.Campanha;
+import JPA.Campanha.CampanhaSerial;
 import JPA.CampanhaCreate;
 import JPA.Utilizador;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -52,17 +54,28 @@ public class CampanhaFacade extends AbstractFacade<Campanha> {
         super.remove(super.find(id));
     }
 
-    public Campanha find(@PathParam("id") Long id) {
-        return super.find(id);
+    public CampanhaSerial find(@PathParam("id") Long id) {
+        try {
+            return super.find(id).getSerialized();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    @Override
-    public List<Campanha> findAll() {
-        return super.findAll();
+    public List<CampanhaSerial> findAllFiltered() {
+        List<Campanha> lista = super.findAll();
+        List<CampanhaSerial> out = new ArrayList<>();
+        for (Campanha c: lista) 
+            out.add(c.getSerialized());
+        return out;
     }
-
-    public List<Campanha> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    
+    public List<CampanhaSerial> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+        List<Campanha> lista = super.findRange(new int[]{from, to});
+        List<CampanhaSerial> out = new ArrayList<>();
+        for (Campanha c: lista) 
+            out.add(c.getSerialized());
+        return out;
     }
 
     public String countREST() {
@@ -71,7 +84,7 @@ public class CampanhaFacade extends AbstractFacade<Campanha> {
 
     @Override
     protected EntityManager getEntityManager() {
-return em;
+        return em;
     }
     
 }

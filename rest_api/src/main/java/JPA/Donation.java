@@ -20,7 +20,6 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author root
  */
 @Entity
-@Table (name="DONATION")
+@Table(name = "DONATION")
 @XmlRootElement
 public class Donation implements Serializable {
 
@@ -37,20 +36,20 @@ public class Donation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @XmlTransient
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "utilizador_id", referencedColumnName="id")
+    @JoinColumn(name = "utilizador_id", referencedColumnName = "id")
     private Utilizador utilizador;
- 
+
     @XmlTransient
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "campanha_id", referencedColumnName="id")
+    @JoinColumn(name = "campanha_id", referencedColumnName = "id")
     private Campanha campanha;
-    
+
     @Column(name = "AMMOUNT")
     private double ammount;
-    
+
     @Temporal(TemporalType.DATE)
     @Column(name = "DATE")
     private Date date;
@@ -58,7 +57,7 @@ public class Donation implements Serializable {
     public Donation() {
     }
 
-    public Donation( Utilizador utilizador, Campanha campanha, double ammount, Date date) {
+    public Donation(Utilizador utilizador, Campanha campanha, double ammount, Date date) {
         this.utilizador = utilizador;
         this.campanha = campanha;
         this.ammount = ammount;
@@ -136,9 +135,29 @@ public class Donation implements Serializable {
     public String toString() {
         return "Donation{" + "id=" + id + ", user=" + utilizador + ", campanha=" + campanha + ", ammount=" + ammount + ", date=" + date + '}';
     }
-    
-    public String customSerialize() {
-        return "{\"utilizador\": " + utilizador.getId() + ", \"campanha\": " + campanha.getId() + ", \"id\": " + this.id + ",\"ammount\": " + this.ammount + ",\"date\": " + this.date + "}";
-    }
-}
 
+    public DonationSerial getSerialized() {
+        return new DonationSerial(this);
+    }
+
+    @XmlRootElement
+    public class DonationSerial {
+
+        public Date date;
+        public double ammount;
+        public Long userId, id, campanhaId;
+
+        public DonationSerial(Donation d) {
+            this.ammount = d.ammount;
+            this.date = d.date;
+            this.campanhaId = d.getCampanha().getId();
+            this.userId = d.getUtilizador().getId();
+        }
+
+        @Override
+        public String toString() {
+            return "DonationSerial{" + "id=" + id + ", ammount=" + ammount + ", date=" + date + ", campanhaId=" + campanhaId + ", userId=" + userId + '}';
+        }
+    }
+
+}

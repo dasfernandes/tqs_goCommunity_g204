@@ -6,6 +6,7 @@
 package rest;
 
 import JPA.Campanha;
+import JPA.Campanha.CampanhaSerial;
 import JPA.CampanhaCreate;
 import JPA.Utilizador;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class CampanhaREST{
     }
 
     @POST
-    @Consumes({ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public Long create(CampanhaCreate campanha) {
         return facade.create(campanha);
     }
@@ -64,20 +65,24 @@ public class CampanhaREST{
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Campanha find(@PathParam("id") Long id) {
-        return facade.find(id);
+    public CampanhaSerial find(@PathParam("id") Long id) {
+        try {
+            return facade.find(id);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON})
-    public List<Campanha> findAll() {
-        return facade.findAll();
+    public List<CampanhaSerial> findAll() {
+        return facade.findAllFiltered();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Campanha> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<CampanhaSerial> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return facade.findRange(from, to);
     }
 

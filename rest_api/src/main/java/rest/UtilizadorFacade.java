@@ -5,9 +5,10 @@
  */
 package rest;
 
-import JPA.Campanha;
-import JPA.CampanhaCreate;
 import JPA.Utilizador;
+import JPA.Utilizador.UtilizadorSerialized;
+import JPA.UtilizadorCreate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -37,9 +38,11 @@ public class UtilizadorFacade extends AbstractFacade<Utilizador> {
         super(Utilizador.class);
     }
     
-    public Long create2(Utilizador u) {
-        super.create(u);
-        return u.getId();
+    public Long create2(UtilizadorCreate u) {
+        Utilizador user = new Utilizador(u.name, u.email, u.pwHash);
+        super.create(user);
+        System.out.println("\nCreated User: " + user.toString());
+        return user.getId();
     }
     
     public Utilizador login(UtilizadorREST.LoginXml login) {
@@ -62,16 +65,29 @@ public class UtilizadorFacade extends AbstractFacade<Utilizador> {
     }
 
     public Utilizador find(@PathParam("id") Long id) {
-        return super.find(id);
+        System.out.println("\n\n\n" + id);
+        List<Utilizador> lista = super.findAll();
+        Utilizador u = super.find(id);
+        System.out.println("User found" +u.toString());
+        return u;
+
+    }
+    
+    public List<UtilizadorSerialized> findAllFiltered() {
+        List<Utilizador> lista = super.findAll();
+        List<UtilizadorSerialized> out = new ArrayList<>();
+        for (Utilizador u: lista) 
+            out.add(u.getSerialized());
+        return out;
     }
 
-    @Override
-    public List<Utilizador> findAll() {
-        return super.findAll();
-    }
-
-    public List<Utilizador> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    public List<UtilizadorSerialized> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+        List<Utilizador> lista = super.findRange(new int[]{from, to});;
+        List<UtilizadorSerialized> out = new ArrayList<>();
+        for (Utilizador u: lista)  {
+            System.out.println("\n\n\n"+ u.toString() +"\n\n");
+            out.add(u.getSerialized());}
+        return out;
     }
 
     public String countREST() {
